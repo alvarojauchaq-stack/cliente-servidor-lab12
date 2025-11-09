@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import os
 import requests  # Import necesario para replicar mensajes
 
 app = Flask(__name__)
@@ -33,5 +34,6 @@ def post_message():
     return jsonify({"status": "error", "message": "No se proporcionó 'message'"}), 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))  # usar PORT de Render si existe
+    app.run(host='0.0.0.0', port=port, debug=True)
 
